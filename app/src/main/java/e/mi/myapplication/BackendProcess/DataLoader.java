@@ -2,14 +2,14 @@ package e.mi.myapplication.BackendProcess;
 
 import android.util.Log;
 
-import e.mi.myapplication.R;
-
-import java.util.List;
-
 import e.mi.myapplication.Interfaces.KudaGoInterface;
 import e.mi.myapplication.Interfaces.MainInterface;
 import e.mi.myapplication.Net.City;
 import e.mi.myapplication.Net.Events;
+import e.mi.myapplication.R;
+
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

@@ -11,14 +11,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+
+import e.mi.myapplication.Net.Event.Result;
+import e.mi.myapplication.Net.Events;
 import e.mi.myapplication.R;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-
-import e.mi.myapplication.Net.Event.Result;
-import e.mi.myapplication.Net.Events;
 
 public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.EventViewHolder> {
     List<Result> list;
