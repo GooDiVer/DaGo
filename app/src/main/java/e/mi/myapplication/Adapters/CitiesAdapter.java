@@ -28,7 +28,7 @@ public class CitiesAdapter extends RecyclerView.Adapter<CitiesAdapter.CityViewHo
     @NonNull
     @Override
     public CitiesAdapter.CityViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.city_recycler_item, viewGroup,false);
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.recycler_item_city, viewGroup,false);
         return new CityViewHolder(view);
     }
 

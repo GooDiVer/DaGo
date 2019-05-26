@@ -4,6 +4,7 @@ import android.util.Log;
 
 import e.mi.myapplication.Interfaces.KudaGoInterface;
 import e.mi.myapplication.Interfaces.MainInterface;
+import e.mi.myapplication.Net.Category;
 import e.mi.myapplication.Net.City;
 import e.mi.myapplication.Net.Events;
 import e.mi.myapplication.R;
@@ -26,6 +27,7 @@ public class DataLoader implements MainInterface.intractor {
         KudaGoInterface goInterface = GetRetrofit.getRetrofit().create(KudaGoInterface.class);
         Call<Events> eventsCall;
         Call<List<City>> citiesCall;
+        Call<List<Category>> categoriesCall;
 
         switch (itemId) {
             case R.id.eventsItem:
@@ -36,10 +38,13 @@ public class DataLoader implements MainInterface.intractor {
                 citiesCall = goInterface.getCities("ru");
                 handleCitiesCallback(citiesCall);
                 break;
-
-                default:
-                    eventsCall = goInterface.getEvent();
-                    handleEventCallback(eventsCall);
+            case R.id.categoryItem:
+                categoriesCall = goInterface.getCategories("ru");
+                handleCategoriesCallback(categoriesCall);
+                break;
+            default:
+                eventsCall = goInterface.getEvent();
+                handleEventCallback(eventsCall);
         }
 
 
@@ -69,6 +74,20 @@ public class DataLoader implements MainInterface.intractor {
 
             @Override
             public void onFailure(Call<List<City>> call, Throwable t) {
+
+            }
+        });
+    }
+
+    public void handleCategoriesCallback(Call<List<Category>> categoriesCall) {
+        categoriesCall.enqueue(new Callback<List<Category>>() {
+            @Override
+            public void onResponse(Call<List<Category>> call, Response<List<Category>> response) {
+                listener.onLoadCategoriesFinished(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<List<Category>> call, Throwable t) {
 
             }
         });

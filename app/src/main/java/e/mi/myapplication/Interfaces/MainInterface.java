@@ -22,9 +22,6 @@ public interface MainInterface {
             void onLoadEventFinished(Events events);
             void onLoadCitiesFinished(List<City> cities);
             void onLoadCategoriesFinished(List<Category> categories);
-            Events getEvents();
-            CitiesAdapter getCitiesAdapter();
-//            CategoryAdapter getCategoriesAdapter();
         }
 
         //Инициализиацирует ретрофит, получает данные и передает их

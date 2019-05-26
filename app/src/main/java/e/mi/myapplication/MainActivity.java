@@ -18,6 +18,7 @@ import java.util.List;
 import e.mi.myapplication.Adapters.CitiesAdapter;
 import e.mi.myapplication.Adapters.EventsAdapter;
 import e.mi.myapplication.BackendProcess.DataLoader;
+import e.mi.myapplication.Fragments.CategoriesFragment;
 import e.mi.myapplication.Fragments.CitiesFragment;
 import e.mi.myapplication.Fragments.EventFragment;
 import e.mi.myapplication.Interfaces.MainInterface;
@@ -25,7 +26,7 @@ import e.mi.myapplication.Net.Category;
 import e.mi.myapplication.Net.City;
 import e.mi.myapplication.Net.Events;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, MainInterface.intractor.onLoadDataListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
 
     private DrawerLayout drawerLayout;
@@ -46,12 +47,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         dataLoader = new DataLoader();
 
-        NavigationView navigationView = (NavigationView)findViewById(R.id.navigationView);
+        NavigationView navigationView = (NavigationView) findViewById(R.id.navigationView);
         navigationView.setNavigationItemSelectedListener(this);
 
         //Инициализируем выпадающее меню
         drawerLayout = findViewById(R.id.drawerLayout);
-        barToggle = new ActionBarDrawerToggle(this,drawerLayout,R.string.open,R.string.close);
+        barToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close);
 
         //Устанавливаем кнопку
         drawerLayout.addDrawerListener(barToggle);
@@ -62,33 +63,30 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
 
-
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-        Toast.makeText(MainActivity.this, "Events Clicked",Toast.LENGTH_LONG);
+        Toast.makeText(MainActivity.this, "Events Clicked", Toast.LENGTH_LONG);
         int itemId = menuItem.getItemId();
         Fragment fragment;
 
         switch (itemId) {
             case R.id.eventsItem:
-                //Здесь происходит вызов метода onLoadEventFinished, в котором events устанавливается значение
-                dataLoader.loadData(this,0);
-                //однако здесь events снова = null
                 fragment = new EventFragment();
-                Log.i("Callback","Method1 which call method2");
-
                 break;
             case R.id.cityItem:
                 fragment = new CitiesFragment();
                 break;
+            case R.id.categoryItem:
+                fragment = new CategoriesFragment();
+                break;
             default:
-                    fragment = new EventFragment();
+                fragment = new EventFragment();
         }
 
         FragmentTransaction transaction = getSupportFragmentManager()
                 .beginTransaction();
 
-        transaction.replace(R.id.container_fragment,fragment)
+        transaction.replace(R.id.container_fragment, fragment)
                 .addToBackStack(null)
                 .commit();
 
@@ -98,53 +96,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        if(barToggle.onOptionsItemSelected(item)) {
+        if (barToggle.onOptionsItemSelected(item)) {
             return true;
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public void onLoadCategoriesFinished(List<Category> categories) {
 
     }
 
-    @Override
-    public void onLoadCitiesFinished(List<City> cities) {
-
-        citiesAdapter.clear();
-        citiesAdapter.addAll(cities);
-        citiesAdapter.notifyDataSetChanged();
-
-    }
-
-    @Override
-    public void onLoadEventFinished(Events events) {
-        //MAKE CHECKING EVENTSADAPTER ON NULL
-//        eventsAdapter = new EventsAdapter(this);
-//        eventsAdapter.clear();
-//        eventsAdapter.addAll(events);
-//        eventsAdapter.notifyDataSetChanged();
-
-        this.events = events;
-        Log.i("Callback","Method2 which set this.events");
-
-    }
-
-    @Override
-    public Events getEvents() {
-        return events;
-    }
-
-
-    @Override
-    public CitiesAdapter getCitiesAdapter() {
-
-        return citiesAdapter;
-    }
-
-//    @Override
-//    public EventsAdapter getCategoriesAdapter() {
-//        return null;
-//    }
 }
