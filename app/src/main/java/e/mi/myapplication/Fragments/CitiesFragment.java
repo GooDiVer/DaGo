@@ -11,7 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import e.mi.myapplication.Adapters.CitiesAdapter;
-import e.mi.myapplication.myapplication.MainActivity;
+import e.mi.myapplication.MainActivity;
 
 import e.mi.myapplication.BackendProcess.DataLoader;
 import e.mi.myapplication.Interfaces.MainInterface;

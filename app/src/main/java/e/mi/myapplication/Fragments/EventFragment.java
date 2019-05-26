@@ -12,7 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import e.mi.myapplication.myapplication.MainActivity;
+import e.mi.myapplication.MainActivity;
 import e.mi.myapplication.Interfaces.MainInterface;
 import e.mi.myapplication.R;
 
