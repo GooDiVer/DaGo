@@ -2,6 +2,7 @@ package e.mi.myapplication.Fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -18,6 +19,8 @@ import e.mi.myapplication.Net.Category;
 import e.mi.myapplication.Net.City;
 import e.mi.myapplication.Net.Events;
 import e.mi.myapplication.R;
+
+import static android.widget.LinearLayout.VERTICAL;
 
 public class CitiesFragment extends Fragment {
     MainInterface.intractor.onLoadDataListener dataListener;
@@ -36,7 +39,13 @@ public class CitiesFragment extends Fragment {
 
         recyclerView = view.findViewById(R.id.city_items_recycler_view);
 
+        DividerItemDecoration decoration = new DividerItemDecoration(getActivity(), VERTICAL);
+
+        recyclerView.addItemDecoration(decoration);
+
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+
 
         DataLoader dataLoader = new DataLoader();
 
@@ -64,5 +73,7 @@ public class CitiesFragment extends Fragment {
         return view;
 
     }
+
+    
 
 }

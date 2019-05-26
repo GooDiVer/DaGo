@@ -2,6 +2,7 @@ package e.mi.myapplication.Fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -14,6 +15,7 @@ import java.util.List;
 import e.mi.myapplication.Adapters.CategoriesAdapter;
 import e.mi.myapplication.BackendProcess.DataLoader;
 import e.mi.myapplication.Interfaces.MainInterface;
+import e.mi.myapplication.MyItemDecoration;
 import e.mi.myapplication.Net.Category;
 import e.mi.myapplication.Net.City;
 import e.mi.myapplication.Net.Events;
@@ -36,9 +38,13 @@ public class CategoriesFragment extends Fragment {
 
         DataLoader dataLoader = new DataLoader();
 
+        MyItemDecoration decoration = new MyItemDecoration(8,2);
+
+
         recyclerView = view.findViewById(R.id.category_items_recycler_view);
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(),2));
+        recyclerView.addItemDecoration(decoration);
 
         dataListener = new MainInterface.intractor.onLoadDataListener() {
             @Override
