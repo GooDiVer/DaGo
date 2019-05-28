@@ -5,10 +5,10 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -21,8 +21,6 @@ import e.mi.myapplication.BackendProcess.DataLoader;
 import e.mi.myapplication.Fragments.CategoriesFragment;
 import e.mi.myapplication.Fragments.CitiesFragment;
 import e.mi.myapplication.Fragments.EventFragment;
-import e.mi.myapplication.Interfaces.MainInterface;
-import e.mi.myapplication.Net.Category;
 import e.mi.myapplication.Net.City;
 import e.mi.myapplication.Net.Events;
 
@@ -32,13 +30,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle barToggle;
 
-    Events events;
-    List<City> cities;
-    EventsAdapter eventsAdapter;
-    CitiesAdapter citiesAdapter;
     DataLoader dataLoader;
-    int counter = 0;
-//    EventsAdapter eventsAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +52,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        makeFragment(new EventFragment());
+
     }
 
 
@@ -72,6 +66,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         switch (itemId) {
             case R.id.eventsItem:
                 fragment = new EventFragment();
+                ExtraParametrs.category = "";
+                ExtraParametrs.city = "";
                 break;
             case R.id.cityItem:
                 fragment = new CitiesFragment();
@@ -83,12 +79,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 fragment = new EventFragment();
         }
 
-        FragmentTransaction transaction = getSupportFragmentManager()
-                .beginTransaction();
+        makeFragment(fragment);
 
-        transaction.replace(R.id.container_fragment, fragment)
-                .addToBackStack(null)
-                .commit();
+        drawerLayout.closeDrawer(GravityCompat.START);
 
         return true;
     }
@@ -100,7 +93,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
 
+    public void makeFragment(Fragment fragment) {
+        FragmentTransaction transaction = getSupportFragmentManager()
+                .beginTransaction();
+
+        transaction.replace(R.id.container_fragment, fragment)
+                .addToBackStack(null)
+                .commit();
     }
 
 }

@@ -1,6 +1,7 @@
 package e.mi.myapplication.Adapters;
 
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -15,6 +16,20 @@ import java.util.List;
 
 public class CitiesAdapter extends RecyclerView.Adapter<CitiesAdapter.CityViewHolder> {
     List<City> cities;
+    Context context;
+    OnItemClickListener listener;
+
+    public City getCity(int i ) {
+        return cities.get(i);
+    }
+
+    public interface OnItemClickListener{
+        void onItemClick(View itemView, int position);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.listener = listener;
+    }
 
     public void clear(){
         if(cities != null)
@@ -24,6 +39,12 @@ public class CitiesAdapter extends RecyclerView.Adapter<CitiesAdapter.CityViewHo
         this.cities = cities;
     }
 
+
+    public CitiesAdapter(Context context) {
+        this.context = context;
+    }
+    public CitiesAdapter() {
+    }
 
     @NonNull
     @Override
@@ -44,9 +65,18 @@ public class CitiesAdapter extends RecyclerView.Adapter<CitiesAdapter.CityViewHo
 
     public class CityViewHolder extends RecyclerView.ViewHolder {
         TextView text;
-        public CityViewHolder(View view) {
+        public CityViewHolder(final View view) {
             super(view);
+
             text = view.findViewById(R.id.cityItemText);
+
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    listener.onItemClick(view,getAdapterPosition());
+                }
+            });
         }
+
     }
 }

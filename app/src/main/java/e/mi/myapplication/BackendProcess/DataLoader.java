@@ -1,9 +1,12 @@
 package e.mi.myapplication.BackendProcess;
 
 import android.util.Log;
+import android.widget.Toast;
 
+import e.mi.myapplication.ExtraParametrs;
 import e.mi.myapplication.Interfaces.KudaGoInterface;
 import e.mi.myapplication.Interfaces.MainInterface;
+import e.mi.myapplication.MainActivity;
 import e.mi.myapplication.Net.Category;
 import e.mi.myapplication.Net.City;
 import e.mi.myapplication.Net.Events;
@@ -31,24 +34,29 @@ public class DataLoader implements MainInterface.intractor {
 
         switch (itemId) {
             case R.id.eventsItem:
-                eventsCall = goInterface.getEvent();
+                Log.i("BeforeResponse",ExtraParametrs.city);
+
+                eventsCall = goInterface.getEvents(ExtraParametrs.category,ExtraParametrs.city);
+
                 handleEventCallback(eventsCall);
+
                 break;
             case R.id.cityItem:
+
                 citiesCall = goInterface.getCities("ru");
                 handleCitiesCallback(citiesCall);
+
                 break;
             case R.id.categoryItem:
+
                 categoriesCall = goInterface.getCategories("ru");
                 handleCategoriesCallback(categoriesCall);
+
                 break;
             default:
                 eventsCall = goInterface.getEvent();
                 handleEventCallback(eventsCall);
         }
-
-
-
     }
 
     public void handleEventCallback(Call<Events> eventsCall) {
@@ -66,6 +74,7 @@ public class DataLoader implements MainInterface.intractor {
     }
 
     public void handleCitiesCallback(Call<List<City>> citiesCall) {
+
         citiesCall.enqueue(new Callback<List<City>>() {
             @Override
             public void onResponse(Call<List<City>> call, Response<List<City>> response) {
@@ -77,6 +86,7 @@ public class DataLoader implements MainInterface.intractor {
 
             }
         });
+
     }
 
     public void handleCategoriesCallback(Call<List<Category>> categoriesCall) {

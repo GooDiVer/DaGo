@@ -14,8 +14,9 @@ public interface KudaGoInterface {
     @GET("events/?fields=dates,title,place,location,price,images,site_url")
     Call<Events> getEvent();
 
-    @GET("events/?fields=dates,title,place,location,price,images,site_url")
-    Call<Events> getEvents(@Query("&categories") String category, @Query("&city") String city);
+    @GET("events/?expand=place,location,dates,participants,images,title&fields=id,place,location,dates,participants,images,title" +
+            "&order_by=-publication_date")
+    Call<Events> getEvents(@Query("categories") String category, @Query("location") String location);
 
     @GET("event-categories/?")
     Call<List<Category>> getCategories(@Query("lang") String lang);

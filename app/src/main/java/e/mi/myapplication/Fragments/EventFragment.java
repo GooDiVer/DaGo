@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -24,6 +25,11 @@ public class EventFragment extends Fragment {
 
     MainInterface.intractor.onLoadDataListener dataListener;
     RecyclerView recyclerView;
+    private String parametr;
+
+    public void setParametr(String parametr) {
+        this.parametr = parametr;
+    }
 
     public MainInterface.intractor.onLoadDataListener getDataListener() {
         return dataListener;
@@ -49,10 +55,16 @@ public class EventFragment extends Fragment {
         dataListener = new MainInterface.intractor.onLoadDataListener() {
             @Override
             public void onLoadEventFinished(Events events) {
+                if(events == null) {
+                    Toast.makeText(getActivity(),"Таких событий не найдено :(", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(),"Выберите другой город или категорию ;)", Toast.LENGTH_LONG).show();
+                }
+
                 EventsAdapter eventsAdapter = new EventsAdapter(getActivity());
                 eventsAdapter.addAll(events);
                 eventsAdapter.notifyDataSetChanged();
                 recyclerView.setAdapter(eventsAdapter);
+
             }
 
             @Override

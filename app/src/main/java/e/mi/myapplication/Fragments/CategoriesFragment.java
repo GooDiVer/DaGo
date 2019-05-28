@@ -38,7 +38,7 @@ public class CategoriesFragment extends Fragment {
 
         DataLoader dataLoader = new DataLoader();
 
-        MyItemDecoration decoration = new MyItemDecoration(8,2);
+        MyItemDecoration decoration = new MyItemDecoration(4,2);
 
 
         recyclerView = view.findViewById(R.id.category_items_recycler_view);
@@ -58,9 +58,8 @@ public class CategoriesFragment extends Fragment {
 
             @Override
             public void onLoadCategoriesFinished(List<Category> categories) {
-                Log.i("Category", "Haha ");
 
-                CategoriesAdapter categoriesAdapter = new CategoriesAdapter();
+                CategoriesAdapter categoriesAdapter = new CategoriesAdapter(getActivity());
 
                 categoriesAdapter.addAll(categories);
                 categoriesAdapter.notifyDataSetChanged();

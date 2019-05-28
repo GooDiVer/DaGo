@@ -14,6 +14,7 @@ import java.util.List;
 import e.mi.myapplication.Adapters.CitiesAdapter;
 
 import e.mi.myapplication.BackendProcess.DataLoader;
+import e.mi.myapplication.ExtraParametrs;
 import e.mi.myapplication.Interfaces.MainInterface;
 import e.mi.myapplication.Net.Category;
 import e.mi.myapplication.Net.City;
@@ -25,6 +26,9 @@ import static android.widget.LinearLayout.VERTICAL;
 public class CitiesFragment extends Fragment {
     MainInterface.intractor.onLoadDataListener dataListener;
     RecyclerView recyclerView;
+    CitiesAdapter citiesAdapter;
+
+    private final String EXTRA_PARAMETR_CITY = "";
 
 
     @Override
@@ -37,17 +41,30 @@ public class CitiesFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_list_cities, container, false);
 
-        recyclerView = view.findViewById(R.id.city_items_recycler_view);
+        Bundle bundle = getArguments();
 
         DividerItemDecoration decoration = new DividerItemDecoration(getActivity(), VERTICAL);
 
-        recyclerView.addItemDecoration(decoration);
+        DataLoader dataLoader = new DataLoader();
 
+        citiesAdapter = new CitiesAdapter(getActivity());
+
+        recyclerView = view.findViewById(R.id.city_items_recycler_view);
+
+        recyclerView.addItemDecoration(decoration);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-
-
-        DataLoader dataLoader = new DataLoader();
+        citiesAdapter.setOnItemClickListener(new CitiesAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View itemView, int position) {
+                Fragment fragment = new EventFragment();
+                ExtraParametrs.city = citiesAdapter.getCity(position).getSlug();
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.container_fragment,fragment,"Okay")
+                        .addToBackStack(null)
+                        .commit();
+            }
+        });
 
         dataListener = new MainInterface.intractor.onLoadDataListener() {
             @Override
@@ -56,10 +73,9 @@ public class CitiesFragment extends Fragment {
 
             @Override
             public void onLoadCitiesFinished(List<City> cities) {
-                CitiesAdapter CitiesAdapter = new CitiesAdapter();
-                CitiesAdapter.addAll(cities);
-                CitiesAdapter.notifyDataSetChanged();
-                recyclerView.setAdapter(CitiesAdapter);
+                citiesAdapter.addAll(cities);
+                citiesAdapter.notifyDataSetChanged();
+                recyclerView.setAdapter(citiesAdapter);
             }
 
             @Override
@@ -74,6 +90,6 @@ public class CitiesFragment extends Fragment {
 
     }
 
-    
+
 
 }

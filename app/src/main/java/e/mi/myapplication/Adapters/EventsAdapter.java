@@ -27,6 +27,8 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.EventViewH
     public EventsAdapter(Context mContext) {
         this.mContext = mContext;
     }
+    public EventsAdapter() {
+    }
 
     public void clear() {
         if(list != null)
@@ -35,25 +37,16 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.EventViewH
 
     public void addAll(Events events) {
         list = events.getResults();
-        Log.i("adapter",list.get(0).getTitle());
     }
 
     @Override
     public void onBindViewHolder(@NonNull EventsAdapter.EventViewHolder eventViewHolder, int i) {
         Result result = list.get(i);
-        long eventStart = result.getDates().get(0).getStart();
-        long eventEnd = result.getDates().get(0).getEnd();
-        Date eventStartDate = new Date(eventStart*1000);
-        Date eventEndDate = new Date(eventEnd*1000);
-
-        SimpleDateFormat eventDateFormat = new SimpleDateFormat("dd.MM.yyyy");
-        SimpleDateFormat eventHourFormat = new SimpleDateFormat("HH:mm");
 
         eventViewHolder.title.setText(result.getTitle());
-        eventViewHolder.date.setText(eventDateFormat.format(eventStartDate));
-        Log.i("date","starts " + result.getDates().get(0).getStart());
-        Log.i("date","ends " + result.getDates().get(0).getEnd());
-        eventViewHolder.location.setText(result.getLocation().getSlug() + " (" + eventHourFormat.format(eventStartDate) + ") ");
+//        eventViewHolder.date.setText(new SimpleDateFormat("dd.MM.yyyy").format(new Date(result.getDates().get(0).getStartDate()*1000)));
+        eventViewHolder.date.setText(result.getDates().get(result.getDates().size() - 1).getStartDate());
+        eventViewHolder.location.setText(result.getLocation().getName());
         Glide.with(mContext).load(result.getImages().get(0).getImage()).into(eventViewHolder.imageView);
     }
 
