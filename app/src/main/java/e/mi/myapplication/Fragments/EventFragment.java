@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,7 @@ import e.mi.myapplication.BackendProcess.DataLoader;
 import e.mi.myapplication.Interfaces.MainInterface;
 import e.mi.myapplication.Net.Category;
 import e.mi.myapplication.Net.City;
+import e.mi.myapplication.Net.Event.Result;
 import e.mi.myapplication.Net.Events;
 import e.mi.myapplication.R;
 
@@ -68,6 +70,11 @@ public class EventFragment extends Fragment {
             }
 
             @Override
+            public void onLoadOneEventFinished(Result result) {
+
+            }
+
+            @Override
             public void onLoadCitiesFinished(List<City> cities) {
 
             }
@@ -78,7 +85,8 @@ public class EventFragment extends Fragment {
             }
         };
 
-        dataLoader.loadData(dataListener,R.id.eventsItem);
+        dataLoader.setListener(dataListener);
+        dataLoader.loadData(R.id.eventsItem);
 
         return view;
 

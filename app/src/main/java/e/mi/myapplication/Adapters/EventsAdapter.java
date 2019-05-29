@@ -1,7 +1,9 @@
 package e.mi.myapplication.Adapters;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,6 +14,8 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
+import e.mi.myapplication.Fragments.DetailFragment;
+import e.mi.myapplication.MainActivity;
 import e.mi.myapplication.Net.Event.Result;
 import e.mi.myapplication.Net.Events;
 import e.mi.myapplication.R;
@@ -43,6 +47,7 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.EventViewH
     public void onBindViewHolder(@NonNull EventsAdapter.EventViewHolder eventViewHolder, int i) {
         Result result = list.get(i);
 
+        eventViewHolder.id = result.getId();
         eventViewHolder.title.setText(result.getTitle());
 //        eventViewHolder.date.setText(new SimpleDateFormat("dd.MM.yyyy").format(new Date(result.getDates().get(0).getStartDate()*1000)));
         eventViewHolder.date.setText(result.getDates().get(result.getDates().size() - 1).getStartDate());
@@ -62,11 +67,12 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.EventViewH
         return list.size();
     }
 
-    public class EventViewHolder extends RecyclerView.ViewHolder {
+    public class EventViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView imageView;
         TextView title;
         TextView date;
         TextView location;
+        int id;
 
         public EventViewHolder(View v) {
             super(v);
@@ -74,7 +80,20 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.EventViewH
             title = v.findViewById(R.id.title_event);
             date = v.findViewById(R.id.date_event);
             location = v.findViewById(R.id.location_event);
+            v.setOnClickListener(this);
         }
 
+        @Override
+        public void onClick(View v) {
+            Fragment fragment = new DetailFragment();
+            Bundle bundle = new Bundle();
+            bundle.putInt("item id",id);
+            fragment.setArguments(bundle);
+
+            ((MainActivity)mContext).getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.container_fragment,fragment,"DetailFragment")
+                    .addToBackStack(null)
+                    .commit();
+        }
     }
 }

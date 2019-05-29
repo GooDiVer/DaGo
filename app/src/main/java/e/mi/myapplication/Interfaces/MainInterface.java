@@ -4,6 +4,7 @@ import java.util.List;
 
 import e.mi.myapplication.Adapters.CitiesAdapter;
 import e.mi.myapplication.Net.*;
+import e.mi.myapplication.Net.Event.Result;
 
 public interface MainInterface {
 
@@ -20,12 +21,13 @@ public interface MainInterface {
         //Решает, как должна вести себя программа, когда данные загружены с сервера
         interface onLoadDataListener {
             void onLoadEventFinished(Events events);
+            void onLoadOneEventFinished(Result result);
             void onLoadCitiesFinished(List<City> cities);
             void onLoadCategoriesFinished(List<Category> categories);
         }
 
         //Инициализиацирует ретрофит, получает данные и передает их
         //onLoadDataLister, который знает, как с ними обращаться
-        void loadData(onLoadDataListener listener, int itemId);
+        void loadData(int itemId);
     }
 }

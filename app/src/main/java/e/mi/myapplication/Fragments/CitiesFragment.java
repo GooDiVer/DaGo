@@ -18,6 +18,7 @@ import e.mi.myapplication.ExtraParametrs;
 import e.mi.myapplication.Interfaces.MainInterface;
 import e.mi.myapplication.Net.Category;
 import e.mi.myapplication.Net.City;
+import e.mi.myapplication.Net.Event.Result;
 import e.mi.myapplication.Net.Events;
 import e.mi.myapplication.R;
 
@@ -41,17 +42,12 @@ public class CitiesFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_list_cities, container, false);
 
-        Bundle bundle = getArguments();
-
-        DividerItemDecoration decoration = new DividerItemDecoration(getActivity(), VERTICAL);
-
         DataLoader dataLoader = new DataLoader();
 
         citiesAdapter = new CitiesAdapter(getActivity());
 
         recyclerView = view.findViewById(R.id.city_items_recycler_view);
 
-        recyclerView.addItemDecoration(decoration);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         citiesAdapter.setOnItemClickListener(new CitiesAdapter.OnItemClickListener() {
@@ -72,6 +68,11 @@ public class CitiesFragment extends Fragment {
             }
 
             @Override
+            public void onLoadOneEventFinished(Result result) {
+
+            }
+
+            @Override
             public void onLoadCitiesFinished(List<City> cities) {
                 citiesAdapter.addAll(cities);
                 citiesAdapter.notifyDataSetChanged();
@@ -84,7 +85,8 @@ public class CitiesFragment extends Fragment {
             }
         };
 
-        dataLoader.loadData(dataListener,R.id.cityItem);
+        dataLoader.setListener(dataListener);
+        dataLoader.loadData(R.id.cityItem);
 
         return view;
 

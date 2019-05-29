@@ -9,6 +9,7 @@ import e.mi.myapplication.Interfaces.MainInterface;
 import e.mi.myapplication.MainActivity;
 import e.mi.myapplication.Net.Category;
 import e.mi.myapplication.Net.City;
+import e.mi.myapplication.Net.Event.Result;
 import e.mi.myapplication.Net.Events;
 import e.mi.myapplication.R;
 
@@ -22,10 +23,12 @@ import retrofit2.Response;
 public class DataLoader implements MainInterface.intractor {
 
     onLoadDataListener listener;
+    public void setListener(onLoadDataListener dataListener) {
+        this.listener = dataListener;
+    }
 
     @Override
-    public void loadData(final onLoadDataListener listener, int itemId) {
-        this.listener = listener;
+    public void loadData(int itemId) {
 
         KudaGoInterface goInterface = GetRetrofit.getRetrofit().create(KudaGoInterface.class);
         Call<Events> eventsCall;
@@ -54,7 +57,7 @@ public class DataLoader implements MainInterface.intractor {
 
                 break;
             default:
-                eventsCall = goInterface.getEvent();
+                eventsCall = goInterface.getEvents("","");
                 handleEventCallback(eventsCall);
         }
     }
@@ -99,6 +102,22 @@ public class DataLoader implements MainInterface.intractor {
             @Override
             public void onFailure(Call<List<Category>> call, Throwable t) {
 
+            }
+        });
+    }
+
+    public void onLoadDetailedItemListener(int id) {
+        Call<Result> eventCall = GetRetrofit.getRetrofit().create(KudaGoInterface.class).getResult(id);
+
+        eventCall.enqueue(new Callback<Result>() {
+            @Override
+            public void onResponse(Call<Result> call, Response<Result> response) {
+                listener.onLoadOneEventFinished(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<Result> call, Throwable t) {
+                Log.e("ServerLoadError", t.toString());
             }
         });
     }
