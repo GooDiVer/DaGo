@@ -17,9 +17,5 @@
         android:icon="@mipmap/baseline_category_black_18dp"
         android:title="@string/categories">
     </item>
-    <item android:id="@+id/exitItem"
-        android:icon="@mipmap/exit"
-        android:title="@string/exit">
-    </item>
 
 </menu>

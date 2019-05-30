@@ -30,7 +30,7 @@
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp"
                 android:textAlignment="center"
-                android:textColor="@color/textColorSecondary"
+                android:textColor="@color/textColorPrimary"
                 android:textSize="24sp" />
 
             <TextView
@@ -39,7 +39,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/title_event"
                 android:layout_alignParentEnd="true"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:layout_alignParentRight="true"
                 android:paddingRight="8dp"
                 android:textColor="@color/textColorSecondary"
@@ -51,7 +51,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/title_event"
-                android:textSize="16sp"
+                android:textSize="20sp"
                 android:paddingLeft="8dp"
                 android:textColor="@color/textColorSecondary"
                 />

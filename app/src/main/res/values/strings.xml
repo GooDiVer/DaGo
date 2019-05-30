@@ -2,11 +2,11 @@
     <string name="app_name">Da_Go</string>
     <string name="open">Open</string>
     <string name="close">Close</string>
-    <string name="events">События</string>
-    <string name="lk">Личный кабинет</string>
-    <string name="city">Город</string>
-    <string name="categories">Категории</string>
-    <string name="exit">Выйти</string>
+    <string name="events"><font fgcolor='#212121'>События</font></string>
+    <string name="lk"><font fgcolor='#212121'>Личный кабинет</font></string>
+    <string name="city"><font fgcolor='#212121'>Город</font></string>
+    <string name="categories"><font fgcolor='#212121'>Категории</font></string>
+    <string name="exit"><font fgcolor='#212121'>Выйти</font></string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

@@ -10,8 +10,11 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
+import android.support.v7.widget.Toolbar;
 
 
 import java.util.List;
@@ -30,11 +33,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle barToggle;
+    Toolbar toolbar;
 
     DataLoader dataLoader;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -45,15 +50,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         //Инициализируем выпадающее меню
         drawerLayout = findViewById(R.id.drawerLayout);
-        barToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
+        barToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open, R.string.close);
         //Устанавливаем кнопку
-        drawerLayout.addDrawerListener(barToggle);
         barToggle.syncState();
 
+//        drawerLayout.addDrawerListener(barToggle);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.toggleicon);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        makeFragment(new EventFragment());
+        makeFragment(new Fragment());
 
     }
 
@@ -67,6 +74,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Log.i("MainActivity","before Error");
 
         switch (itemId) {
+
             case R.id.eventsItem:
                 fragment = new EventFragment();
                 ExtraParametrs.category = "";
