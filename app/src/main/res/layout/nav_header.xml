@@ -16,6 +16,7 @@
         android:src="@mipmap/personavatar" />
 
     <TextView
+        android:id="@+id/menuPersonName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Name LastName"
@@ -23,7 +24,7 @@
         android:textSize="16sp" />
 
     <TextView
-        android:id="@+id/cityPerson"
+        android:id="@+id/menuCityName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -32,6 +33,7 @@
         android:textSize="16sp" />
 
     <TextView
+        android:id="@+id/menuEmailName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"

@@ -7,6 +7,7 @@
     <string name="city"><font fgcolor='#212121'>Город</font></string>
     <string name="categories"><font fgcolor='#212121'>Категории</font></string>
     <string name="exit"><font fgcolor='#212121'>Выйти</font></string>
+    <string name="noLogged"><font fgcolor='#212121'>Вы не вошли в аккаунт</font></string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

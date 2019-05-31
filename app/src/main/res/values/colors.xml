@@ -6,7 +6,6 @@
     <color name="backgroundColor1">#EDF5E1</color>
     <color name="backgroundColor2">#5CDB95</color>
     <color name="textColorPrimary">#212121</color>
-    <color name="dividerColor">#40212121</color>
-    <color name="textColorSecondary">#626262</color>
-
+    <color name="dividerColor">#80424242</color>
+    <color name="textColorSecondary">#424242</color>
 </resources>

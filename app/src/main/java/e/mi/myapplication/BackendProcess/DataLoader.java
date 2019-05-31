@@ -1,12 +1,10 @@
 package e.mi.myapplication.BackendProcess;
 
 import android.util.Log;
-import android.widget.Toast;
 
-import e.mi.myapplication.ExtraParametrs;
+import e.mi.myapplication.ExtraParameters;
 import e.mi.myapplication.Interfaces.KudaGoInterface;
 import e.mi.myapplication.Interfaces.MainInterface;
-import e.mi.myapplication.MainActivity;
 import e.mi.myapplication.Net.Category;
 import e.mi.myapplication.Net.City;
 import e.mi.myapplication.Net.Event.Result;
@@ -37,15 +35,14 @@ public class DataLoader implements MainInterface.intractor {
 
         switch (itemId) {
             case R.id.eventsItem:
-                Log.i("BeforeResponse",ExtraParametrs.city);
+                Log.i("BeforeResponse", ExtraParameters.city);
 
-                eventsCall = goInterface.getEvents(ExtraParametrs.category,ExtraParametrs.city);
+                eventsCall = goInterface.getEvents(ExtraParameters.category, ExtraParameters.city);
 
                 handleEventCallback(eventsCall);
 
                 break;
             case R.id.cityItem:
-
                 citiesCall = goInterface.getCities("ru");
                 handleCitiesCallback(citiesCall);
 

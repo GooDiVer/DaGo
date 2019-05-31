@@ -9,26 +9,21 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
-import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.support.v7.widget.Toolbar;
 
 
-import java.util.List;
-
-import e.mi.myapplication.Adapters.CitiesAdapter;
-import e.mi.myapplication.Adapters.EventsAdapter;
 import e.mi.myapplication.BackendProcess.DataLoader;
 import e.mi.myapplication.Fragments.CategoriesFragment;
 import e.mi.myapplication.Fragments.CitiesFragment;
+import e.mi.myapplication.Fragments.DetailFragment;
 import e.mi.myapplication.Fragments.EventFragment;
-import e.mi.myapplication.Net.City;
-import e.mi.myapplication.Net.Events;
+import e.mi.myapplication.Fragments.PersonalAreaFragment;
+import e.mi.myapplication.Interfaces.MainInterface;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, MainInterface.fragmentItemListener {
 
 
     private DrawerLayout drawerLayout;
@@ -57,10 +52,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //Устанавливаем кнопку
         barToggle.syncState();
 
-//        drawerLayout.addDrawerListener(barToggle);
+        drawerLayout.addDrawerListener(barToggle);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.toggleicon);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        makeFragment(new Fragment());
+
+        makeFragment(new EventFragment());
 
     }
 
@@ -71,14 +67,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int itemId = menuItem.getItemId();
         Fragment fragment;
 
-        Log.i("MainActivity","before Error");
-
         switch (itemId) {
-
+            case R.id.lkItem:
+                fragment = new PersonalAreaFragment();
+                break;
             case R.id.eventsItem:
+                ExtraParameters.category = "";
+                ExtraParameters.fullCityName = "";
                 fragment = new EventFragment();
-                ExtraParametrs.category = "";
-                ExtraParametrs.city = "";
                 break;
             case R.id.cityItem:
                 fragment = new CitiesFragment();
@@ -104,6 +100,31 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void changeToolbar(String tittleBar) {
+        getSupportActionBar().setTitle(tittleBar);
+    }
+
+    @Override
+    public void changeUserInfo() {
+        ((TextView)findViewById(R.id.menuPersonName)).setText(ExtraParameters.personName);
+        ((TextView)findViewById(R.id.menuCityName)).setText(ExtraParameters.fullCityName);
+        ((TextView)findViewById(R.id.menuEmailName)).setText(ExtraParameters.emailName);
+
+    }
+
+    @Override
+    public void onAttachFragment(Fragment fragment) {
+        if (fragment instanceof EventFragment) {
+            EventFragment eventFragment = (EventFragment)fragment;
+            eventFragment.setFragmentItemListener(this);
+        }
+        else if(fragment instanceof DetailFragment) {
+            DetailFragment detailFragment = (DetailFragment)fragment;
+            detailFragment.setFragmentItemListener(this);
+        }
     }
 
     public void makeFragment(Fragment fragment) {

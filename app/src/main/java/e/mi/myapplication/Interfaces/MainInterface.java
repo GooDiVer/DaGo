@@ -1,5 +1,7 @@
 package e.mi.myapplication.Interfaces;
 
+import android.widget.Toolbar;
+
 import java.util.List;
 
 import e.mi.myapplication.Adapters.CitiesAdapter;
@@ -29,5 +31,10 @@ public interface MainInterface {
         //Инициализиацирует ретрофит, получает данные и передает их
         //onLoadDataLister, который знает, как с ними обращаться
         void loadData(int itemId);
+    }
+
+    interface fragmentItemListener {
+        void changeToolbar(String tittleBar);
+        void changeUserInfo();
     }
 }

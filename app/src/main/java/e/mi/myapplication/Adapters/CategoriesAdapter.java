@@ -10,8 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import e.mi.myapplication.ExtraParametrs;
-import e.mi.myapplication.Fragments.CitiesFragment;
+import e.mi.myapplication.ExtraParameters;
 import e.mi.myapplication.Fragments.EventFragment;
 import e.mi.myapplication.MainActivity;
 import e.mi.myapplication.Net.Category;
@@ -63,7 +62,8 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
         @Override
         public void onClick(View v) {
             Fragment fragment = new EventFragment();
-            ExtraParametrs.category = categories.get(getAdapterPosition()).getSlug();
+            ExtraParameters.category = categories.get(getAdapterPosition()).getSlug();
+            ExtraParameters.fullCategory = categories.get(getAdapterPosition()).getName();
             ((MainActivity)mContext).getSupportFragmentManager().beginTransaction().
                     replace(R.id.container_fragment, fragment,"Category")
                     .addToBackStack(null)

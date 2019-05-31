@@ -16,6 +16,7 @@ import java.util.List;
 
 import e.mi.myapplication.Adapters.EventsAdapter;
 import e.mi.myapplication.BackendProcess.DataLoader;
+import e.mi.myapplication.ExtraParameters;
 import e.mi.myapplication.Interfaces.MainInterface;
 import e.mi.myapplication.Net.Category;
 import e.mi.myapplication.Net.City;
@@ -26,15 +27,12 @@ import e.mi.myapplication.R;
 public class EventFragment extends Fragment {
 
     MainInterface.intractor.onLoadDataListener dataListener;
+    public MainInterface.fragmentItemListener fragmentItemListener;
+
     RecyclerView recyclerView;
-    private String parametr;
 
-    public void setParametr(String parametr) {
-        this.parametr = parametr;
-    }
-
-    public MainInterface.intractor.onLoadDataListener getDataListener() {
-        return dataListener;
+    public void setFragmentItemListener(MainInterface.fragmentItemListener fragmentItemListener) {
+        this.fragmentItemListener = fragmentItemListener;
     }
 
     @Override
@@ -51,6 +49,16 @@ public class EventFragment extends Fragment {
         recyclerView = view.findViewById(R.id.events_items_recycler_view);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        return view;
+
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        fragmentItemListener.changeToolbar(ExtraParameters.fullCityName + " " + ExtraParameters.fullCategory);
 
         DataLoader dataLoader = new DataLoader();
 
@@ -88,13 +96,6 @@ public class EventFragment extends Fragment {
         dataLoader.setListener(dataListener);
         dataLoader.loadData(R.id.eventsItem);
 
-        return view;
-
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
     }
 
 

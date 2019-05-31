@@ -33,12 +33,18 @@ import e.mi.myapplication.R;
 public class DetailFragment extends Fragment {
 
     MainInterface.intractor.onLoadDataListener dataListener;
+    MainInterface.fragmentItemListener fragmentItemListener;
 
     ViewPager viewPager;
     TextView bodyText;
     TextView descText;
     ArrayList<String> imageList;
     TabLayout tabLayout;
+
+    public void setFragmentItemListener(MainInterface.fragmentItemListener fragmentItemListener) {
+        this.fragmentItemListener = fragmentItemListener;
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -73,6 +79,8 @@ public class DetailFragment extends Fragment {
 
                 List<Image> images = result.getImages();
 
+                fragmentItemListener.changeToolbar(result.getTitle());
+
                 for(Image x : images) {
                     imageList.add(x.getImage());
                 }
@@ -105,5 +113,11 @@ public class DetailFragment extends Fragment {
         dataLoader.setListener(dataListener);
         dataLoader.onLoadDetailedItemListener(id);
 
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        fragmentItemListener.changeToolbar("");
     }
 }

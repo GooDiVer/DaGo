@@ -36,7 +36,6 @@ public class CategoriesFragment extends Fragment {
 
         DataLoader dataLoader = new DataLoader();
 
-
         recyclerView = view.findViewById(R.id.category_items_recycler_view);
 
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(),2));
