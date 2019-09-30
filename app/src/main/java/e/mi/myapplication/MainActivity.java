@@ -23,7 +23,10 @@ import e.mi.myapplication.Fragments.EventFragment;
 import e.mi.myapplication.Fragments.PersonalAreaFragment;
 import e.mi.myapplication.Interfaces.MainInterface;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, MainInterface.fragmentItemListener {
+public class MainActivity extends AppCompatActivity
+        implements NavigationView.OnNavigationItemSelectedListener,
+        MainInterface.fragmentItemListener,
+        ToolbarController {
 
 
     private DrawerLayout drawerLayout;
@@ -120,8 +123,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (fragment instanceof EventFragment) {
             EventFragment eventFragment = (EventFragment)fragment;
             eventFragment.setFragmentItemListener(this);
-        }
-        else if(fragment instanceof DetailFragment) {
+        } else if(fragment instanceof DetailFragment) {
             DetailFragment detailFragment = (DetailFragment)fragment;
             detailFragment.setFragmentItemListener(this);
         }
@@ -136,4 +138,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 .commit();
     }
 
+    @Override
+    public void onToolbarTitleChange(String title) {
+        changeToolbar(title);
+    }
 }
