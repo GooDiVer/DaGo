@@ -18,26 +18,25 @@ DaGo *(агрегатор событий)*
 3. Retrofit API
 
 ## Скриншоты
-- *Окно для перевода*
+- *Открытие события*
 
-<img src="/graphics/Screenshot_1579602688.png" height="600" />
+<img src="/graphics/Screenshot_2020-01-21-15-04-45-844_e.mi.jpg" height="600" />
 
+- *Навигационное меню*
 
-- *Всплывающее окно выбора языка для перевода*
+<img src="/graphics/Screenshot_2020-01-21-15-04-59-617_e.mi.jpg" height="600" />
 
-<img src="/graphics/Screenshot_1579602692.png" height="600" />
+- *Выбор категории*
 
-- *Форум для обсуждения, перевода иностранных текстов*
+<img src="/graphics/Screenshot_2020-01-21-15-05-06-163_e.mi.jpg" height="600" />
 
-<img src="/graphics/Screenshot_1579602700.png" height="600" />
+- *Список отфильтрованных событий*
 
-- *Выпадающее окно для добавления вопроса*
-
-<img src="/graphics/Screenshot_1579602805.png" height="600" />
+<img src="/graphics/Screenshot_2020-01-21-15-06-09-827_e.mi.jpg" height="600" />
 
 - *Личный кабинет (заглушка)*
 
-<img src="/graphics/Screenshot_1579602824.png" height="600" />
+
 
 
 
