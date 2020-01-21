@@ -1,5 +1,6 @@
 package e.mi.myapplication.Fragments;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -23,11 +24,13 @@ import e.mi.myapplication.Net.City;
 import e.mi.myapplication.Net.Event.Result;
 import e.mi.myapplication.Net.Events;
 import e.mi.myapplication.R;
+import e.mi.myapplication.ToolbarController;
 
 public class EventFragment extends Fragment {
 
     MainInterface.intractor.onLoadDataListener dataListener;
     public MainInterface.fragmentItemListener fragmentItemListener;
+    public ToolbarController toolbarController;
 
     RecyclerView recyclerView;
 
@@ -58,7 +61,12 @@ public class EventFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        fragmentItemListener.changeToolbar(ExtraParameters.fullCityName + " " + ExtraParameters.fullCategory);
+//        fragmentItemListener.changeToolbar(ExtraParameters.fullCityName + " " + ExtraParameters.fullCategory);
+
+        if (toolbarController != null) {
+            toolbarController.onToolbarTitleChange(ExtraParameters.fullCityName + " " + ExtraParameters.fullCategory);
+        }
+
 
         DataLoader dataLoader = new DataLoader();
 
@@ -98,5 +106,19 @@ public class EventFragment extends Fragment {
 
     }
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
 
+        if (context instanceof ToolbarController) {
+            toolbarController = (ToolbarController) context;
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+
+        toolbarController = null;
+    }
 }

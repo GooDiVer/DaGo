@@ -19,7 +19,7 @@
         android:id="@+id/menuPersonName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Name LastName"
+        android:text="Vasiliev Vasily"
         android:textColor="@color/backgroundColor1"
         android:textSize="16sp" />
 
@@ -28,7 +28,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="City"
+        android:text="Moscow"
         android:textColor="@color/backgroundColor1"
         android:textSize="16sp" />
 
@@ -37,7 +37,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:text="Email"
+        android:text="vasya123@mail.ru"
         android:textColor="@color/backgroundColor1"
         android:textSize="16sp" />
 
