@@ -30,11 +30,17 @@ DaGo *(агрегатор событий)*
 
 <img src="/graphics/Screenshot_2020-01-21-15-05-06-163_e.mi.jpg" height="600" />
 
+- *Выбор города*
+
+<img src="/graphics/Screenshot_2020-01-21-15-05-02-592_e.mi.jpg" height="600" />
+
 - *Список отфильтрованных событий*
 
 <img src="/graphics/Screenshot_2020-01-21-15-06-09-827_e.mi.jpg" height="600" />
 
 - *Личный кабинет (заглушка)*
+
+<img src="/graphics/Screenshot_2020-01-21-15-49-22-479_e.mi.jpg" height="600" />
 
 
 
